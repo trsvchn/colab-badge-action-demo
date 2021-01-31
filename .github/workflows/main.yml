@@ -18,7 +18,7 @@ jobs:
           check: 'all'
           update: true
           target_branch: main
-          target_repository: trsvchn/colab-badge-action-test
+          target_repository: trsvchn/colab-badge-action-demo
 
       - name: Commit and Push Changes
         uses: stefanzweifel/git-auto-commit-action@v4
