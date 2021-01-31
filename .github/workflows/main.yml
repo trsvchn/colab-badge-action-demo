@@ -1,5 +1,5 @@
 name: Test Colab Badge Action
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
@@ -8,13 +8,21 @@ jobs:
     steps:
       - name: Checkout
         id: checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
+
       - name: Add/Update badges
         id: badges
-        uses: trsvchn/colab-badge-action@v2
+        uses: trsvchn/colab-badge-action@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          args: ''
           check: 'all'
           update: true
-          target_branch: master
-          target_repository: trsvchn/colab-badge-action-v2-test
+          target_branch: main
+          target_repository: trsvchn/colab-badge-action-test
+
+      - name: Commit and Push Changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Add/Update Colab badges"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
